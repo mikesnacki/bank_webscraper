@@ -9,6 +9,7 @@ soup = BeautifulSoup(page.content, 'html.parser')
 checking_accts = soup.find_all("div", class_=re.compile("listing__group-item"))
 
 checking_names = []
+checking_details = []
 
 for checking_acct in checking_accts:
     try:
@@ -19,3 +20,9 @@ for checking_acct in checking_accts:
     except AttributeError:
         pass
     
+    try:
+        card_content = account.find("div", class_="card__content").find("ul", recursive=False).find_all("li", recursive=False).text
+        print(card_content)
+    except AttributeError:
+        pass
+
